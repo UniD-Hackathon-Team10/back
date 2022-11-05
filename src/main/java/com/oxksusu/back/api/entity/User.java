@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -32,6 +33,10 @@ public class User {
     @Column(name = "USERNAME", length = 100)
     @NotNull
     private String username;
+
+    @Column(name = "NICKNAME", length = 64)
+    @Nullable
+    private String nickname;
 
     @JsonIgnore
     @Column(name = "PASSWORD", length = 128)
