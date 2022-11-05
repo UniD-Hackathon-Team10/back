@@ -52,7 +52,6 @@ public class Posts extends BaseTimeEntity {
     }
 
     /* 게시글 작성용 Post 엔티티 빌더 */
-    @Builder
     public Posts(String userId,
                  String nickname,
                  String author,
@@ -68,5 +67,11 @@ public class Posts extends BaseTimeEntity {
         this.bookTitle = bookTitle;
         this.content = content;
         this.bookThumbnail = bookThumbnail;
+    }
+
+    public Posts(String bookTitle, String content, String author) {
+        this.author = author;
+        this.bookTitle = bookTitle;
+        this.content = content;
     }
 }

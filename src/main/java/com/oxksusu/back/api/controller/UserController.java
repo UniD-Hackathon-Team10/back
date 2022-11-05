@@ -1,5 +1,6 @@
 package com.oxksusu.back.api.controller;
 
+import com.oxksusu.back.api.entity.Posts;
 import com.oxksusu.back.api.service.dto.PostWriteDto;
 import com.oxksusu.back.common.ApiResponse;
 import com.oxksusu.back.api.entity.User;
@@ -32,11 +33,16 @@ public class UserController {
         return ApiResponse.success("posts", userService.getAllPosts(userId));
     }
 
+    @GetMapping("/article/category/{category}")// 한 사람이 쓴 게시글 전체 목록 조회 (최신순)
+    public ApiResponse readCategory(@PathVariable String category) {
+
+        return ApiResponse.success("posts", userService.getAllCategory(category));
+    }
+
     @PostMapping("/write") // 게시글 작성
-    public ApiResponse write(@RequestBody PostWriteDto writeDto) {
+    public ApiResponse write(@RequestBody Posts posts) {
 
-        String msg = userService.writePost(writeDto);
-
-        return ApiResponse.success("msg", msg);
+        userService.writePost(posts);
+        return ApiResponse.success("msg", "게시글 작성에 성공했습니다.");
     }
 }

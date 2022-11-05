@@ -36,6 +36,10 @@ public class UserService {
         return postsRepository.findById(articleNo).orElseThrow();
     }
 
+    public List<Posts> getAllCategory(String category) {
+        return postsRepository.findAllByCategory(category);
+    }
+
     public Posts getPostByArticleNo(Long articleNo) {
         return postsRepository.findPostDetail(articleNo);
     }
@@ -65,19 +69,24 @@ public class UserService {
 
     public String writePost(PostWriteDto postWriteDto) {
 
-        Posts posts = Posts.builder()
-                .userId(postWriteDto.getUserId())
-                .nickname(postWriteDto.getNickname())
-                .author(postWriteDto.getAuthor())
-                .category(postWriteDto.getCategory())
-                .bookTitle(postWriteDto.getBookTitle())
-                .content(postWriteDto.getContent())
-                .bookThumbnail(postWriteDto.getBookThumbnail())
-                .build();
+        Posts posts = new Posts(
+                postWriteDto.getUserId(),
+                postWriteDto.getNickname(),
+                postWriteDto.getAuthor(),
+                postWriteDto.getCategory(),
+                postWriteDto.getBookTitle(),
+                postWriteDto.getContent(),
+                postWriteDto.getBookThumbnail()
+        );
 
         postsRepository.save(posts);
 
         return ("게시글 작성에 성공하였습니다.");
+    }
+
+    public void writePost(Posts posts) {
+
+        postsRepository.save(posts);
     }
 
 }
