@@ -35,6 +35,19 @@ public class UserService {
     public Posts getPosts(Long articleNo) {
         return postsRepository.findById(articleNo).orElseThrow();
     }
+
+    public Posts getPostByArticleNo(Long articleNo) {
+        return postsRepository.findPostDetail(articleNo);
+    }
+
+    public String modifyPost(PostModifyDto modifyDto) {
+
+        Posts posts = postsRepository.findByUserId(modifyDto.getUserId());
+        posts.update(modifyDto.getBookTitle(), modifyDto.getContent());
+        postsRepository.save(posts);
+
+        return ("게시글 수정에 성공하였습니다.");
+    }
 //
 //    public Posts getPostByArticleNo(Long articleNo) {
 //        return postsRepository.findById(articleNo)
