@@ -46,7 +46,6 @@ public class Posts extends BaseTimeEntity {
     @Column(name = "LIKE_RATE", length = 64)
     public Long likeRate;
 
-
     /* 게시글 작성용 Post 엔티티 빌더 */
     @Builder
     public Posts(Long userId,

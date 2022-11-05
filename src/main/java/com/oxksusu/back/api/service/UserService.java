@@ -27,8 +27,8 @@ public class UserService {
         return postsRepository.findAll();
     }
 
-    public List<Posts> getPostsByNickname(String nickname) {
-        return postsRepository.findAllByNickname(nickname);
+    public List<Posts> getPostsByUserId(Long userId) {
+        return postsRepository.findAllByUserId(userId);
     }
 
     public Posts getPostByArticleNo(Long articleNo) {
@@ -36,9 +36,9 @@ public class UserService {
                 .orElseThrow();
     }
 
-    public String modifyPost(Long articleNo, PostModifyDto modifyDto) {
+    public String modifyPost(PostModifyDto modifyDto) {
 
-        Posts posts = postsRepository.findById(articleNo).orElseThrow();
+        Posts posts = postsRepository.findByUserId(modifyDto.getUserId());
         posts.update(modifyDto.getBookTitle(), modifyDto.getContent());
         postsRepository.save(posts);
 

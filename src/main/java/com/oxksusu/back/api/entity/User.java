@@ -73,6 +73,24 @@ public class User {
     @NotNull
     private LocalDateTime modifiedAt;
 
+    @Column(name = "TITLE", length = 64)
+    private String bookTitle;
+
+    @Column(name = "AUTHOR", length = 64)
+    private String author;
+
+    @Column(name = "CONTENT", length = 4000)
+    private String content;
+
+    @Column(name = "BOOK_THUMBNAIL")
+    private String bookThumbnail;
+
+    @Column(name = "CATEGORY")
+    private String category;
+
+    @Column(name = "LIKE_RATE")
+    private int likeRate;
+
     public User(
             @NotNull String userId,
             @NotNull String username,

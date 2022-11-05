@@ -63,34 +63,39 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .formLogin().disable()
                 .httpBasic().disable()
-                // 예외처리부
-                .exceptionHandling()
-                .authenticationEntryPoint(new RestAuthenticationEntryPoint())
-                .accessDeniedHandler(tokenAccessDeniedHandler)
-                .and()
-                // 접근 권한처리
-                .authorizeRequests()
-                .antMatchers("/h2-console/**").permitAll()
-                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
-                .antMatchers("/api/**").hasAnyAuthority(RoleType.USER.getCode())
-                .antMatchers("/api/**/admin/**").hasAnyAuthority(RoleType.ADMIN.getCode())
-                .anyRequest().authenticated()
-                .and()
-                .oauth2Login()
-                .authorizationEndpoint()
-                .baseUri("/oauth2/authorization")
-                .authorizationRequestRepository(oAuth2AuthorizationRequestBasedOnCookieRepository())
-                .and()
-                .redirectionEndpoint()
-                .baseUri("/*/oauth2/code/*")
-                .and()
-                .userInfoEndpoint()
-                .userService(oAuth2UserService)
-                .and()
-                .successHandler(oAuth2AuthenticationSuccessHandler())
-                .failureHandler(oAuth2AuthenticationFailureHandler());
 
-        http.addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+                .authorizeRequests()
+                .antMatchers("**").permitAll();
+
+                // 잠깐 끌게요
+                // 예외처리부
+//                .exceptionHandling()
+//                .authenticationEntryPoint(new RestAuthenticationEntryPoint())
+//                .accessDeniedHandler(tokenAccessDeniedHandler)
+//                .and()
+//                // 접근 권한처리
+//                .authorizeRequests()
+//                .antMatchers("/h2-console/**").permitAll()
+//                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+//                .antMatchers("/api/**").hasAnyAuthority(RoleType.USER.getCode())
+//                .antMatchers("/api/**/admin/**").hasAnyAuthority(RoleType.ADMIN.getCode())
+//                .anyRequest().authenticated()
+//                .and()
+//                .oauth2Login()
+//                .authorizationEndpoint()
+//                .baseUri("/oauth2/authorization")
+//                .authorizationRequestRepository(oAuth2AuthorizationRequestBasedOnCookieRepository())
+//                .and()
+//                .redirectionEndpoint()
+//                .baseUri("/*/oauth2/code/*")
+//                .and()
+//                .userInfoEndpoint()
+//                .userService(oAuth2UserService)
+//                .and()
+//                .successHandler(oAuth2AuthenticationSuccessHandler())
+//                .failureHandler(oAuth2AuthenticationFailureHandler());
+
+//        http.addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     /*

@@ -29,12 +29,14 @@ public class PostController {
         return ApiResponse.success("posts", posts);
     }
 
-    @GetMapping("/article/{nickname}")// 한 사람이 쓴 게시글 전체 목록 조회 (최신순)
+    @GetMapping("/article/{userId}")// 한 사람이 쓴 게시글 전체 목록 조회 (최신순)
     public ApiResponse readPostList(HttpServletRequest request,
                                     HttpServletResponse response,
-                                    @PathVariable String nickname) {
+                                    @PathVariable String userId) {
 
-        return ApiResponse.success("posts", userService.getPostsByNickname(nickname));
+        Long LUserId = Long.parseLong(userId);
+
+        return ApiResponse.success("posts", userService.getPostsByUserId(LUserId));
     }
 
     @GetMapping("/article/{articleNo}") // 게시글 번호로 게시글 조회
@@ -44,13 +46,10 @@ public class PostController {
         return ApiResponse.success("posts", userService.getPostByArticleNo(articleNo));
     }
 
-    @PostMapping("/modify/{articleNo}") // 게시글 번호로 게시글 수정
-    public ApiResponse modifyPost(HttpServletRequest request,
-                                  HttpServletResponse response,
-                                  @PathVariable Long articleNo,
-                                  @RequestBody PostModifyDto modifyDto) {
+    @PostMapping("/modify") // 게시글 번호로 게시글 수정
+    public ApiResponse modifyPost(@RequestBody PostModifyDto modifyDto) {
 
-        String msg = userService.modifyPost(articleNo, modifyDto);
+        String msg = userService.modifyPost(modifyDto);
 
         return ApiResponse.success("msg", msg);
     }
