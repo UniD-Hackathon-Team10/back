@@ -33,6 +33,16 @@ public class PostController {
         return ApiResponse.success("posts", userService.getPosts(articleNo));
     }
 
+    // @GetMapping("/article/{userId}")// 한 사람이 쓴 게시글 전체 목록 조회 (최신순)
+    // public ApiResponse readPostList(HttpServletRequest request,
+    //                                 HttpServletResponse response,
+    //                                 @PathVariable String userId) {
+
+    //     Long LUserId = Long.parseLong(userId);
+
+    //     return ApiResponse.success("posts", userService.getPostsByUserId(LUserId));
+    // }
+
 //    @PostMapping("/modify") // 게시글 번호로 게시글 수정
 //    public ApiResponse modifyPost(@RequestBody PostModifyDto modifyDto) {
 //
