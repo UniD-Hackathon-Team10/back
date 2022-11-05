@@ -33,6 +33,12 @@ public class PostController {
         return ApiResponse.success("posts", userService.getPosts(articleNo));
     }
 
+    @GetMapping("/category/{category}")// 한 사람이 쓴 게시글 전체 목록 조회 (최신순)
+    public ApiResponse readCategory(@PathVariable String category) {
+
+        return ApiResponse.success("posts", userService.getAllCategory(category));
+    }
+
     // @GetMapping("/article/{userId}")// 한 사람이 쓴 게시글 전체 목록 조회 (최신순)
     // public ApiResponse readPostList(HttpServletRequest request,
     //                                 HttpServletResponse response,
