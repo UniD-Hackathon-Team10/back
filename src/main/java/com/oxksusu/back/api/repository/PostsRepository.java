@@ -18,4 +18,6 @@ public interface PostsRepository extends JpaRepository<Posts, Long> {
     Posts findByUserId(String userId);
 
     List<Posts> findAllByCategory(String category);
+
+    List<Posts> findAllByBookTitle(String keyword);
 }

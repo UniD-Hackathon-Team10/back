@@ -52,6 +52,11 @@ public class UserService {
 
         return ("게시글 수정에 성공하였습니다.");
     }
+
+    public List<Posts> searchPost(String keyword) {
+
+        return postsRepository.findAllByBookTitle(keyword);
+    }
 //
 //    public Posts getPostByArticleNo(Long articleNo) {
 //        return postsRepository.findById(articleNo)

@@ -33,29 +33,17 @@ public class PostController {
         return ApiResponse.success("posts", userService.getPosts(articleNo));
     }
 
-    @GetMapping("/category/{category}")// 한 사람이 쓴 게시글 전체 목록 조회 (최신순)
+    @GetMapping("/category/{category}")// 카테고리명으로 필터링
     public ApiResponse readCategory(@PathVariable String category) {
 
         return ApiResponse.success("posts", userService.getAllCategory(category));
     }
 
-    // @GetMapping("/article/{userId}")// 한 사람이 쓴 게시글 전체 목록 조회 (최신순)
-    // public ApiResponse readPostList(HttpServletRequest request,
-    //                                 HttpServletResponse response,
-    //                                 @PathVariable String userId) {
+    @GetMapping("/search/{keyword}") // 검색
+    public ApiResponse searchKeyword(@PathVariable String keyword) {
 
-    //     Long LUserId = Long.parseLong(userId);
-
-    //     return ApiResponse.success("posts", userService.getPostsByUserId(LUserId));
-    // }
-
-//    @PostMapping("/modify") // 게시글 번호로 게시글 수정
-//    public ApiResponse modifyPost(@RequestBody PostModifyDto modifyDto) {
-//
-//        String msg = userService.modifyPost(modifyDto);
-//
-//        return ApiResponse.success("msg", msg);
-//    }
+        return ApiResponse.success("posts", userService.searchPost(keyword));
+    }
 
 
 
