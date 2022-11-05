@@ -20,11 +20,11 @@ public class Posts extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long articleNo;
 
-    @Column(name = "USER_ID", length = 64, unique = true)
+    @Column(name = "USER_ID", length = 64)
     @NotNull
-    public Long userId; // USER 테이블과 조인할 key값
+    public String userId; // USER 테이블과 조인할 key값
 
-    @Column(name = "NICKNAME", length = 64, unique = true)
+    @Column(name = "NICKNAME", length = 64)
     @NotNull
     public String nickname;
 
@@ -46,9 +46,14 @@ public class Posts extends BaseTimeEntity {
     @Column(name = "LIKE_RATE", length = 64)
     public Long likeRate;
 
+    public void update(String bookTitle, String content) {
+        this.bookTitle = bookTitle;
+        this.content = content;
+    }
+
     /* 게시글 작성용 Post 엔티티 빌더 */
     @Builder
-    public Posts(Long userId,
+    public Posts(String userId,
                  String nickname,
                  String author,
                  String category,
@@ -63,10 +68,5 @@ public class Posts extends BaseTimeEntity {
         this.bookTitle = bookTitle;
         this.content = content;
         this.bookThumbnail = bookThumbnail;
-    }
-
-    public void update(String bookTitle, String content) {
-        this.bookTitle = bookTitle;
-        this.content = content;
     }
 }

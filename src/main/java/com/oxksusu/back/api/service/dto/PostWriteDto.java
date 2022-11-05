@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class PostWriteDto {
 
-    public Long userId;
+    public String userId;
 
     public String nickname;
 

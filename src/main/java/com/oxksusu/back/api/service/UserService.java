@@ -15,35 +15,40 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
-    private final PostsRepository postsRepository;
 
+    private final PostsRepository postsRepository;
     // 사용자 정보
     public User getUser(String userId) {
         return userRepository.findByUserId(userId);
     }
 
     // 전체 게시글 조회 (최신순)
-    public List<Posts> getPosts() {
+    public List<Posts> getAllPosts() {
         return postsRepository.findAll();
     }
 
-    public List<Posts> getPostsByUserId(Long userId) {
+    // 사용자 한 명 전체 게시글 조회
+    public List<Posts> getAllPosts(String userId) {
         return postsRepository.findAllByUserId(userId);
     }
 
-    public Posts getPostByArticleNo(Long articleNo) {
-        return postsRepository.findById(articleNo)
-                .orElseThrow();
+    public Posts getPosts(Long articleNo) {
+        return postsRepository.findById(articleNo).orElseThrow();
     }
-
-    public String modifyPost(PostModifyDto modifyDto) {
-
-        Posts posts = postsRepository.findByUserId(modifyDto.getUserId());
-        posts.update(modifyDto.getBookTitle(), modifyDto.getContent());
-        postsRepository.save(posts);
-
-        return ("게시글 수정에 성공하였습니다.");
-    }
+//
+//    public Posts getPostByArticleNo(Long articleNo) {
+//        return postsRepository.findById(articleNo)
+//                .orElseThrow();
+//    }
+//
+//    public String modifyPost(PostModifyDto modifyDto) {
+//
+//        Posts posts = postsRepository.findByUserId(modifyDto.getUserId());
+//        posts.update(modifyDto.getBookTitle(), modifyDto.getContent());
+//        postsRepository.save(posts);
+//
+//        return ("게시글 수정에 성공하였습니다.");
+//    }
 
     public String writePost(PostWriteDto postWriteDto) {
 
