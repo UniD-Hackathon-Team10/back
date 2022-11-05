@@ -88,9 +88,6 @@ public class User {
     @Column(name = "CATEGORY")
     private String category;
 
-    @Column(name = "LIKE_RATE")
-    private int likeRate;
-
     public User(
             @NotNull String userId,
             @NotNull String username,

@@ -1,16 +1,11 @@
 package com.oxksusu.back.api.controller;
 
-import com.oxksusu.back.api.entity.Posts;
-import com.oxksusu.back.api.service.dto.PostWriteDto;
 import com.oxksusu.back.common.ApiResponse;
 import com.oxksusu.back.api.entity.User;
 import com.oxksusu.back.api.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/api/v1/users")
@@ -35,10 +30,5 @@ public class UserController {
 
 
 
-    @PostMapping("/write") // 게시글 작성
-    public ApiResponse write(@RequestBody Posts posts) {
 
-        userService.writePost(posts);
-        return ApiResponse.success("msg", "게시글 작성에 성공했습니다.");
-    }
 }

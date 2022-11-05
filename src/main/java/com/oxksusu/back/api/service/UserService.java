@@ -1,13 +1,14 @@
 package com.oxksusu.back.api.service;
 
+import com.oxksusu.back.api.entity.Book;
 import com.oxksusu.back.api.entity.Posts;
 import com.oxksusu.back.api.entity.User;
+import com.oxksusu.back.api.repository.BookRepository;
 import com.oxksusu.back.api.repository.PostsRepository;
 import com.oxksusu.back.api.repository.UserRepository;
-import com.oxksusu.back.api.service.dto.PostModifyDto;
-import com.oxksusu.back.api.service.dto.PostWriteDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,6 +18,8 @@ public class UserService {
     private final UserRepository userRepository;
 
     private final PostsRepository postsRepository;
+
+    private final BookRepository bookRepository;
     // 사용자 정보
     public User getUser(String userId) {
         return userRepository.findByUserId(userId);
@@ -44,19 +47,11 @@ public class UserService {
         return postsRepository.findPostDetail(articleNo);
     }
 
-    public String modifyPost(PostModifyDto modifyDto) {
-
-        Posts posts = postsRepository.findByUserId(modifyDto.getUserId());
-        posts.update(modifyDto.getBookTitle(), modifyDto.getContent());
-        postsRepository.save(posts);
-
-        return ("게시글 수정에 성공하였습니다.");
-    }
-
     public List<Posts> searchPost(String keyword) {
 
         return postsRepository.findAllByBookTitle(keyword);
     }
+
 //
 //    public Posts getPostByArticleNo(Long articleNo) {
 //        return postsRepository.findById(articleNo)
@@ -72,9 +67,18 @@ public class UserService {
 //        return ("게시글 수정에 성공하였습니다.");
 //    }
 
+    @Transactional
     public void writePost(Posts posts) {
 
         postsRepository.save(posts);
     }
 
+    public List<Book> searchBookInfo() {
+        return bookRepository.findAll();
+    }
+
+    public Book searchBookInfo(String keyword) {
+
+        return bookRepository.findByBookTitle(keyword);
+    }
 }
