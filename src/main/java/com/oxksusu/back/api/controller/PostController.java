@@ -39,12 +39,10 @@ public class PostController {
         return ApiResponse.success("posts", userService.getAllCategory(category));
     }
 
-    @GetMapping("/search/{keyword}") // 검색
+    @GetMapping("/search/{keyword}") // 책 제목으로 검색
     public ApiResponse searchKeyword(@PathVariable String keyword) {
 
         return ApiResponse.success("posts", userService.searchPost(keyword));
     }
-
-
 
 }

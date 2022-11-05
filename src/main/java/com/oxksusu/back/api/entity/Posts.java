@@ -14,7 +14,6 @@ import javax.persistence.*;
 @Table(name = "POSTS")
 public class Posts extends BaseTimeEntity {
 
-    @JsonIgnore
     @Id
     @Column(name = "ARTICLE_NO")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,7 +51,8 @@ public class Posts extends BaseTimeEntity {
     }
 
     /* 게시글 작성용 Post 엔티티 빌더 */
-    public Posts(String userId,
+    public Posts(Long articleNo,
+                 String userId,
                  String nickname,
                  String author,
                  String category,
@@ -60,6 +60,7 @@ public class Posts extends BaseTimeEntity {
                  String content,
                  String bookThumbnail) {
 
+        this.articleNo = articleNo;
         this.userId = userId;
         this.nickname = nickname;
         this.author = author;

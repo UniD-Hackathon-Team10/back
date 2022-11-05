@@ -72,23 +72,6 @@ public class UserService {
 //        return ("게시글 수정에 성공하였습니다.");
 //    }
 
-    public String writePost(PostWriteDto postWriteDto) {
-
-        Posts posts = new Posts(
-                postWriteDto.getUserId(),
-                postWriteDto.getNickname(),
-                postWriteDto.getAuthor(),
-                postWriteDto.getCategory(),
-                postWriteDto.getBookTitle(),
-                postWriteDto.getContent(),
-                postWriteDto.getBookThumbnail()
-        );
-
-        postsRepository.save(posts);
-
-        return ("게시글 작성에 성공하였습니다.");
-    }
-
     public void writePost(Posts posts) {
 
         postsRepository.save(posts);
