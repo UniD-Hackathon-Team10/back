@@ -70,7 +70,7 @@ public class UserService {
     @Transactional
     public void writePost(Posts posts) {
 
-        postsRepository.save(posts);
+        postsRepository.savePost(posts.author, posts.bookThumbnail, posts.bookTitle, posts.category, posts.content, posts.nickname, posts.userId);
     }
 
     public List<Book> searchBookInfo() {
